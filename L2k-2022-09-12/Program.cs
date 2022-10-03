@@ -2,8 +2,13 @@
 using System.Xml;
 using L2k_2022_09_12;
 
+TrigComplex tz1 = new TrigComplex(1, 0.5);
+TrigComplex tz2 = new TrigComplex(1, -1.5);
+var tz3 = tz1 + tz2;
+
 Complex z1 = new Complex();
 Complex z2 = new Complex(3, -5);
+Console.WriteLine("{0}: Re={1}, Im={2}", z2, z2['r'], z2['I']);
 Complex z3 = new Complex(z2);
 Complex z4 = z2;
 z2.Im = -1;
@@ -54,7 +59,7 @@ m2[0][1] = 333;
 int[,] m3 = new int[10, 20];
 m3[0, 1] = 333;
 */
-Days dd = Days.Monday;
+/*Days dd = Days.Monday;
 Console.WriteLine(dd);
 Days dd2 = Days.Sunday | Days.Saturday;
 Console.WriteLine(dd2);
@@ -72,4 +77,54 @@ enum Days
     Saturday  = 0b_00100000,
     Sunday    = 0b_01000000,
     WeekEnd   = Saturday | Sunday
+}*/
+
+MyClass mc = new MyClass();
+mc.AddData(10);
+mc.AddData(new List<int>(){1, 3, 5});
+mc.AddData(2, 4, 6, 8, 10);
+
+Person p = new("Иван", 23);
+(string name, int age) = p;
+
+class MyClass
+{
+    private List<int> data = new();
+    public void AddData(int elem)
+    {
+        data.Add(elem);
+    }
+
+    public void AddData(List<int> elems)
+    {
+        data.AddRange(elems);
+    }
+
+    public void AddData(params int[] elems)
+    {
+        data.AddRange(elems);
+    }
+}
+
+class Person
+{
+    private string name;
+    private int age;
+    
+    public Person(string name, int age)
+    {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void Deconstruct(out string pName, out int pAge)
+    {
+        pName = name;
+        pAge = age;
+    }
+
+    public void Test(ref int x)
+    {
+        x++;
+    }
 }

@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace L2k_2022_09_12
 {
-    class Complex
+    public class Complex
     {
-        private static int count = 0;
-        private int index;
-        private static double EPSILON = 1e-25;
+        protected static int count = 0;
+        protected int index;
+        protected static double EPSILON = 1e-25;
         public static int Count
         {
             get => count;
         }
 
-        private double im;
+        protected double im;
 
         public double Re { get; set; }
 
@@ -25,6 +25,24 @@ namespace L2k_2022_09_12
         {
             get => im;
             set => im = value;
+        }
+
+        public double? this[char part]
+        {
+            get
+            {
+                if (part == 'r' || part == 'R') return Re;
+                if (part == 'i' || part == 'I') return Im;
+                return null;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    if (part == 'r' || part == 'R') Re = (double)value;
+                    if (part == 'i' || part == 'I') Im = (double)value;
+                }
+            }
         }
 
         public double roIm => im;
